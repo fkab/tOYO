@@ -24,8 +24,7 @@ The publication's content is stored as XHTML.
 INPUT: EPUB file (E) 
 
 1. Unzip E
-2. Iterate through the content files and replace all cursive fonts. Examples: \<em></em>, \<blockquote></blockquote>
-2.1. The set of the replaced elements should be configurable. 
+2. Iterate through the content files and replace all cursive fonts. The set of the replaced elements should be configurable. 
 3. Zip E
 
 OUTPUT: EPUB file without cursive fonts (E')
