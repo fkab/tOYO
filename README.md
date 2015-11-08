@@ -9,14 +9,17 @@ These are displayed as follows: ???????????? ?? ???? ?????? ????
 
 tOYO should fix this issue for the EPUB file format by removing all cursive formatting (italics).  
 
-## EPUB
+
+## Specification 
+
+### EPUB
 
 An ePub publication is delivered as a single file. 
 This file is an unencrypted zipped archive containing a set of interrelated resources.
 The publication's content is stored as XHTML. 
 
 
-## Solution Sketch
+### Solution Sketch
 
 INPUT: EPUB file (E) 
 
