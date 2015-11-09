@@ -1,0 +1,4 @@
+elements = {
+    'em': '',
+    'blockquote': '<br/>'
+}
