@@ -1,9 +1,10 @@
 import zipfile
 import os
 import random
-import settings
-import writer
 import shutil
+import re
+import settings
+
 
 class Transformer:
     def __init__(self, file_location):
@@ -11,17 +12,12 @@ class Transformer:
         self.working_dir = os.path.join(os.path.dirname(os.path.realpath(file_location)),
                                         str(random.randrange(100, 999)))
 
-    def do(self):
-        self.unzip_it()
-        self.transform()
-        self.zip_it()
-
     def transform(self):
         xhtml_files = self._get_all_files('.xhtml')
 
         for file in xhtml_files:
             for key, value in settings.elements.items():
-                writer.replace(file, key, value)
+                replace(file, key, value)
 
     def unzip_it(self):
         os.mkdir(self.working_dir)
@@ -42,9 +38,22 @@ class Transformer:
         return set_of_files
 
 
+def replace(file_location, pattern, replacement):
+    f = open(file_location, 'r', encoding='utf8')
+    text = f.read()
+    f.close()
+    tmp_location = file_location + '_'
+    f = open(tmp_location, 'w', encoding='utf8')
+    f.write(re.sub('<.?' + pattern + '[^>]*>', replacement, text))
+    f.close()
+    shutil.move(tmp_location, file_location)
+
+
 def it(file_location):
     if zipfile.is_zipfile(file_location):
         transformer = Transformer(file_location)
-        transformer.do()
+        transformer.unzip_it()
+        transformer.transform()
+        transformer.zip_it()
     else:
         raise zipfile.BadZipfile(file_location + ' is not a EPUB file')
